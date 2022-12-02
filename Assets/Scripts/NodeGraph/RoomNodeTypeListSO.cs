@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomNodeTypeListSO : MonoBehaviour
+[CreateAssetMenu(fileName = "RoomNodeTypeListSO", menuName = "Scriptable Objects/Dungeon/Room Node Type List")]
+public class RoomNodeTypeListSO : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    #region Header ROOM NODE TYPE LIST
+    [Space(10)]
+    [Header("ROOM NODE TYPE LIST")]
+    #endregion
+    #region Tooltip
+    [Tooltip("This list should be populated with all the RoomNodeTypeSO for the game - it is used instead of an enum")]
+    #endregion
+    public List<RoomNodeTypeSO> list;
 
-    // Update is called once per frame
-    void Update()
+    #region Validation
+#if UNITY_EDITOR
+    private void OnValidate()
     {
-        
+        HelperUtilities.ValidateCheckEnumerableValues(this, nameof(list), list);
     }
+#endif
+    #endregion
 }
